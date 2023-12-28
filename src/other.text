@@ -1,0 +1,10 @@
+Target:
+Backend:
+
+Frontend:
+
+Schema Architecture...
+1.Single Department to hold all PoliceStation in Single District,city.
+2.in Department many PoliceStations (Department-----PoliceStations(1toM))
+3.In policeStations many officers but single officier work single policestations (policestations----officers(1toM)).
+4.in policestations many cases.(policestations----cases(1tom)).
