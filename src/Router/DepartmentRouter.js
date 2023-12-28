@@ -1,5 +1,5 @@
 import express from "express";
-import { getDepartData, saveDepartData, savePoliceStationData, updatePoliceStationDataToDepart } from "../Controller/departmentDataController.js";
+import { getDepartData, saveDepartData, savePoliceStationData, saveofficerData, updateOfficersDataTOPoliceS, updatePoliceStationDataToDepart } from "../Controller/departmentDataController.js";
 import multer from "multer";
 import path from "path";
 const router = express.Router();
@@ -15,7 +15,9 @@ router.use(express.static('src/Images'));
 const upload = multer({storage:storage});
 router.post("/department",saveDepartData);
 router.post("/savepolicestation",upload.single('image'),savePoliceStationData);
+router.post("/saveofficers",upload.single('image'),saveofficerData);
 router.put("/updatedepart/policestation/:id/:obj",updatePoliceStationDataToDepart);
+router.put("/updatepolicestation/officers/:id/:obj",updateOfficersDataTOPoliceS);
 router.get("/",getDepartData);
 
 export default router;

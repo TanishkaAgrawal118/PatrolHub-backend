@@ -32,7 +32,7 @@ const policestation = new mongoose.Schema({
     officers: [{ type: mongoose.Schema.Types.ObjectId, ref: "officers"}],
     // cases:[{type:mongoose.Schema.Types.ObjectId,ref:""}],
     number:{type:Number,required:true},
-    
+    image:{type:String}
 
 
 });
