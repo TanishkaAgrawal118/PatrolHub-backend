@@ -100,3 +100,4 @@ export async function updateOfficersDataTOPoliceS(req,res){
         
        }
 } 
+
