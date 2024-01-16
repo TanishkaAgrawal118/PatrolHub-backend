@@ -1,4 +1,5 @@
 Target:
+
 Backend:
 
 Frontend:
@@ -8,3 +9,4 @@ Schema Architecture...
 2.in Department many PoliceStations (Department-----PoliceStations(1toM))
 3.In policeStations many officers but single officier work single policestations (policestations----officers(1toM)).
 4.in policestations many cases.(policestations----cases(1tom)).
+5.userSchema otp verify  done

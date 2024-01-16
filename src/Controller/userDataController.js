@@ -4,6 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import twilio from "twilio";
+import { policeStation } from "../Schema/DepartmentSchema.js";
 dotenv.config();
 export async function saveUserData(req, res) {
     try {
@@ -45,7 +46,7 @@ const userSendVerifyData = async (number) => {
         client.messages
             .create({
                 body: `We are always Protect you Verify ${otp}`,
-                to: `+${number}`, // Text your number
+                to: `+91${number}`, // Text your number
                 from: '+18722137291', // From a valid Twilio number
             })
             .then((message) => console.log(message.sid));
@@ -94,11 +95,24 @@ export async function verifyOtp(req,res)
 
 export async function userLogin(req, res) {
     try {
-        const users = await user.findOne({ number: req.body.number });
+        const users = await user.findOne({ number: req.body.number })
+                .populate("vehiclecomplaints")
+                .populate("generalThefts")
+                .populate("kidnappingReport");
+                //after some we change policestation byname 
+        const data = await policeStation.find();
         if (users) {
             if (bcrypt.compareSync(req.body.password, users.password)) {
+                // await users.populate('complaint');
                 const token = jwt.sign({ userId: users.users_id }, 'sumit123');
-                res.status(StatusCodes.OK).json({ token: token });
+                res.status(StatusCodes.OK).json({ 
+                        token: token ,id:users._id,
+                        vehiclecomplaints:users.vehiclecomplaints,
+                        generalThefts:users.generalThefts,
+                        kidnappingReport:users.kidnappingReport,
+                        policeStation:data[0]._id,
+
+                    });
             }
             else {
                 res.status(StatusCodes.BAD_REQUEST).json("Wrong Password..!");
@@ -115,3 +129,18 @@ export async function userLogin(req, res) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
     }
 }
+//update complaints
+// export async function updateComplaintToUser(req,res)
+// {
+//       try 
+//       {
+//           await user.findByIdAndUpdate(req.params.id,{$push:{complaint:req.params.obj}});
+//           res.status(StatusCodes.OK).json();
+//       } 
+//       catch (error)
+//        {
+//         console.log(error);
+//         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+        
+//       }
+// }

@@ -3,12 +3,6 @@ import cors from "cors";
 import { ConfigureDb } from "./src/Config/dbConfig.js";
 import router from "./src/Router/DepartmentRouter.js";
 import userRouter from "./src/Router/userRouter.js";
-import dotenv from "dotenv";
-dotenv.config();
-// console.log(process.env);
-//   console.log(process.env.ACCOUNTSID);
-//   console.log(process.env.AUTHTOKEN);
-
 // import twilio from 'twilio';
 const app = express();
 app.use(cors());
