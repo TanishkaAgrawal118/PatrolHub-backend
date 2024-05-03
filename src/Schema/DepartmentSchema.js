@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import {user} from "../Schema/userSchema.js"
-import { arrestedpersons } from "./CitizenSchemas.js";
 const Depart = new mongoose.Schema({
     name: {
         type: String,
@@ -55,6 +53,9 @@ const Depart = new mongoose.Schema({
     // allnews:[
     //     {type:mongoose.Schema.Types.ObjectId,ref:"allnews"}
     // ]
+    officers:[
+        {type:mongoose.Schema.Types.ObjectId, ref:"officers"}
+    ],
 });
 
 const policestation = new mongoose.Schema({

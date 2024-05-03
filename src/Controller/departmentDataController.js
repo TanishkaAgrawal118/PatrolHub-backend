@@ -97,6 +97,19 @@ export async function saveofficerData(req, res) {
     }
 }
 
+//delete officers data
+
+export async function deleteOfficer(req,res)
+{
+    try {
+        await Officers.findByIdAndDelete(req.params.id);
+            res.status(StatusCodes.NO_CONTENT).json();
+    } catch (error) {
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message:'Error in deleting officer'});
+    }
+}
+
 //update officers in policeStations
 
 export async function updateOfficersDataTOPoliceS(req, res) {
@@ -215,6 +228,8 @@ export async function updateDepartment(req,res){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
       }
     }
+
+
 // saveRules
 export async function saveActData(req,res)
 {
@@ -267,6 +282,16 @@ export async function getFullNews(req,res)
 {
     try {
         const response = await News.find();
+        res.status(StatusCodes.OK).json(response);
+    } catch (error) {
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+    }
+}
+export async function fetchOfficers(req,res)
+{
+    try {
+        const response = await Officers.find();
         res.status(StatusCodes.OK).json(response);
     } catch (error) {
         console.log(error);

@@ -1,5 +1,5 @@
 import express from "express";
-import { getDepartData, getFullNews, saveActData, saveDepartData, saveNews, saveNoticeData, savePoliceStationData, savedistrictData, saveofficerData, updateDepartment, updateDepartmentToAct, updateNoticeDepart, updateOfficersDataTOPoliceS, updatePoliceStationDataToDepart, updateUserToPoliceStations, updatedistrict } from "../Controller/departmentDataController.js";
+import { deleteOfficer, fetchOfficers, getDepartData, getFullNews, saveActData, saveDepartData, saveNews, saveNoticeData, savePoliceStationData, savedistrictData, saveofficerData, updateDepartment, updateDepartmentToAct, updateNoticeDepart, updateOfficersDataTOPoliceS, updatePoliceStationDataToDepart, updateUserToPoliceStations, updatedistrict } from "../Controller/departmentDataController.js";
 import multer from "multer";
 import path from "path";
 import { saveVehicleComaplaints, updateVehicleComToComplaint } from "../Controller/complaintsController.js";
@@ -48,5 +48,8 @@ router.put("/update/policestation/pgverify/:id/:obj",updatePoliceStationToPgVeri
 router.put("/update/department/act/:id/:obj",updateDepartmentToAct);
 router.get("/",getDepartData);
 router.get("/news/fullnews",getFullNews);
+router.get("/contact/officers",fetchOfficers);
+router.get("/contact/officers/:id",fetchOfficers);
+
 
 export default router;
